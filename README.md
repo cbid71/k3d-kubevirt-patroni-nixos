@@ -37,6 +37,15 @@ Then
 kubectl get pods
 ```
 
+Reminder :
+- to start k3d :
+    k3d cluster list
+    k3d start cluster <my cluster>
+- to stop k3d :
+    k3d cluster list
+    k3d cluster stop <my cluster>
+
+
 ## Install kubevirt
 
 ```
@@ -64,3 +73,8 @@ kubectl apply -f ./test/test-vm.yaml
 virtctl console testvm
 ```
 
+Reminder :
+to relaunch this lab
+systemctl start docker
+k3s cluster list
+k3s cluster start mycluster
