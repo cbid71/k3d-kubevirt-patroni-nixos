@@ -46,11 +46,11 @@ https://nixos.org/download/
 
 ### Reminder :
 to relaunch this lab
-
+```
 systemctl start docker
 k3s cluster list
 k3s cluster start mycluster
-
+```
 
 ## Install dependencies - Option 2 NixOS ( RECOMMENDED )
 
@@ -60,7 +60,7 @@ then
 
 It will :
 - install docker ecosystem
-- create a user "user" that will have all dependencies
+- create a user `user` that will have all dependencies
 - install virtctl command line tool
 - install k3d to create clusters
 
@@ -78,12 +78,15 @@ kubectl get pods
 
 Reminder :
 - to start k3d :
+  ```
     k3d cluster list
     k3d start cluster <my cluster>
+  ```
 - to stop k3d :
+  ```
     k3d cluster list
     k3d cluster stop <my cluster>
-
+  ```
 ## Install kubevirt
 
 ```
@@ -115,5 +118,9 @@ TODO
 
 TODO
 
-[comment]<>(could be great if we could have the possibility to have MANY clusters defined and just play a command to generate one cluster or all yaml files)
+[comment]: <> (could be great if we could have the possibility to have MANY clusters defined and just play a command to generate one cluster or all yaml files)
+
+## Test framework
+
+TODO
 
