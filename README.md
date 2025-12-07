@@ -80,7 +80,7 @@ Reminder :
 - to start k3d :
   ```
     k3d cluster list
-    k3d start cluster <my cluster>
+    k3d cluster start <my cluster>
   ```
 - to stop k3d :
   ```
