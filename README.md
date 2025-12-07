@@ -102,17 +102,27 @@ kubectl apply -f ./test/test-vm.yaml
 virtctl console testvm
 ```
 
+## About images
+
+Images are based on `nixos-generators` as it's currently the most valued project to create VM images.
+
 ## Generate an etcd image for kubevirt
 
 TODO
+
+nix build .#packages.x86_64-linux.etcd
 
 ## Generate a postgresql+patroni image for kubevirt
 
 TODO
 
+nix build .#packages.x86_64-linux.postgresql-patroni
+
 ## Generate a haproxy image for kubevirt
 
 TODO
+
+nix build .#packages.x86_64-linux.haproxy
 
 ## Generate yaml manifest to deploy clusters
 
