@@ -55,7 +55,19 @@ k3s cluster start mycluster
 ## Install dependencies - Option 2 NixOS ( RECOMMENDED )
 
 Import the `dependencies_nixos/custom.nix` in `configuration.nix`
-then 
+
+then enable experimental feature
+
+In `/etc/configuration.nix`
+
+```
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '
+```
+
+then
+ 
 `nixos-rebuild switch`
 
 It will :
@@ -108,9 +120,10 @@ Images are based on `nixos-generators` as it's currently the most valued project
 
 ## Generate an etcd image for kubevirt
 
-TODO
-
+```
+cd patroni_on_demand
 nix build .#packages.x86_64-linux.etcd
+```
 
 ## Generate a postgresql+patroni image for kubevirt
 
