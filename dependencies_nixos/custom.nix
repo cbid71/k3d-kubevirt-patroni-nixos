@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz;
+  home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz;
 in
 {
   imports =
@@ -25,7 +25,7 @@ in
   
     # The state version is required and should stay at the version you
     # originally installed.
-    home.stateVersion = "25.05";
+    home.stateVersion = "25.11";
   };
   virtualisation.docker.enable = true;   # whole docker ecosystem
 }
