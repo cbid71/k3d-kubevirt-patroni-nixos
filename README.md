@@ -127,19 +127,20 @@ nix build .#packages.x86_64-linux.etcd
 
 ## Generate a postgresql+patroni image for kubevirt
 
-TODO
-
+```
+cd patroni_on_demand
 nix build .#packages.x86_64-linux.postgresql-patroni
+```
 
 ## Generate a haproxy image for kubevirt
 
-TODO
-
+```
+cd patroni_on_demand
 nix build .#packages.x86_64-linux.haproxy
+```
 
 ## Generate yaml manifest to deploy clusters
 
-TODO
 
 [comment]: <> (could be great if we could have the possibility to have MANY clusters defined and just play a command to generate one cluster or all yaml files)
 
@@ -147,3 +148,12 @@ TODO
 
 TODO
 
+## Bonus
+
+Build all images in one command :
+
+```
+nix build .#packages.x86_64-linux.etcd \
+          .#packages.x86_64-linux.haproxy \
+          .#packages.x86_64-linux.postgresql-patroni
+```
