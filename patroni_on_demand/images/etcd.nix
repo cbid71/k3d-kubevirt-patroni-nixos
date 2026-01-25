@@ -3,8 +3,10 @@
   system.stateVersion = "25.05";
   
 #  boot.loader.grub.device = "/dev/vda";
-  
-#  networking.hostName = "etcd";
+
+  # to name the image and the qcow file  
+  networking.hostName = "etcd";
+  system.name = "etcd";
   
   # Désactiver tout le réseau automatique
   networking.useDHCP = false;

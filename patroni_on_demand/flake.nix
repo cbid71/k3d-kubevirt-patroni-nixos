@@ -18,16 +18,18 @@
            ./images/etcd.nix
         ];
       };
-#      postgresql-patroni = nixos-generators.nixosGenerate {
-#        inherit system pkgs;
-#        modules = [ ./images/postgresql-patroni.nix ];
-#        format = "qcow2";                                  
-#      };
-#      haproxy = nixos-generators.nixosGenerate {
-#        inherit system pkgs;
-#        modules = [ ./images/haproxy.nix ];
-#        format = "qcow2";
-#      };
+      postgresql-patroni = nixos-generators.nixosGenerate {
+        inherit system pkgs;
+        format = "qcow";
+        modules = [
+          ./images/postgresql-patroni.nix
+        ];
+      };
+      haproxy = nixos-generators.nixosGenerate {
+        inherit system pkgs;
+        format = "qcow";
+        modules = [ ./images/haproxy.nix ];
+      };
     };
     nixosConfigurations = {
       # description of clusters
