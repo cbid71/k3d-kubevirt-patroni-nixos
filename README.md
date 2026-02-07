@@ -48,8 +48,8 @@ https://nixos.org/download/
 to relaunch this lab
 ```
 systemctl start docker
-k3s cluster list
-k3s cluster start mycluster
+k3d cluster list
+k3d cluster start mycluster
 ```
 
 ## Install dependencies - Option 2 NixOS ( RECOMMENDED )
