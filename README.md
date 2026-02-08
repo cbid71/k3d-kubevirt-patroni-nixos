@@ -144,6 +144,15 @@ nix build .#packages.x86_64-linux.haproxy
 
 [comment]: <> (could be great if we could have the possibility to have MANY clusters defined and just play a command to generate one cluster or all yaml files)
 
+```
+# Generate ONE cluster yaml
+nix build .#nixosConfigurations.parisYaml
+
+# Generate ALL clusters yaml
+nix build .#nixosConfigurations
+```
+
+
 ## Test framework
 
 TODO
