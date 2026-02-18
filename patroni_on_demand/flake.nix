@@ -43,21 +43,21 @@
   in
   {
     packages.${system} = {
-      etcd = renameImage "etcd" (nixos-generators.nixosGenerate {
+      etcd = nixos-generators.nixosGenerate {
         inherit system pkgs;
         format = "qcow";
         modules = [ ./images/etcd.nix ];
-      });
-      postgresql-patroni = renameImage "postgresql-patroni" (nixos-generators.nixosGenerate {
+      };
+      postgresql-patroni = nixos-generators.nixosGenerate {
         inherit system pkgs;
         format = "qcow";
         modules = [ ./images/postgresql-patroni.nix ];
-      });
-      haproxy = renameImage "haproxy" (nixos-generators.nixosGenerate {
+      };
+      haproxy = nixos-generators.nixosGenerate {
         inherit system pkgs;
         format = "qcow";
         modules = [ ./images/haproxy.nix ];
-      });
+      };
 
       all-yaml = pkgs.symlinkJoin {
         name = "all-clusters";
