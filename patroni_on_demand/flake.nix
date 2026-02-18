@@ -21,20 +21,19 @@
     '';
 
     generateClusterYaml = cluster: let
-      indices = lib.range 0 (cluster.count - 1);
-      resources = lib.concatMap (i: [
-        (import ./kubevirt_templates/haproxy-vm.nix      { clusterName = cluster.name; index = i; })
-        (import ./kubevirt_templates/haproxy-service.nix { clusterName = cluster.name; index = i; })
-        (import ./kubevirt_templates/haproxy-ingress.nix { clusterName = cluster.name; index = i; })
+      resources = [
+        (import ./kubevirt_templates/haproxy-vm.nix      { clusterName = cluster.name; })
+        (import ./kubevirt_templates/haproxy-service.nix { clusterName = cluster.name; })
+        (import ./kubevirt_templates/haproxy-ingress.nix { clusterName = cluster.name; })
 
-        (import ./kubevirt_templates/etcd-vm.nix         { clusterName = cluster.name; index = i; })
-        (import ./kubevirt_templates/etcd-service.nix    { clusterName = cluster.name; index = i; })
-        (import ./kubevirt_templates/etcd-ingress.nix    { clusterName = cluster.name; index = i; })
+        (import ./kubevirt_templates/etcd-vm.nix         { clusterName = cluster.name; })
+        (import ./kubevirt_templates/etcd-service.nix    { clusterName = cluster.name; })
+        (import ./kubevirt_templates/etcd-ingress.nix    { clusterName = cluster.name; })
 
-        (import ./kubevirt_templates/patroni-vm.nix      { clusterName = cluster.name; index = i; })
-        (import ./kubevirt_templates/patroni-service.nix { clusterName = cluster.name; index = i; })
-        (import ./kubevirt_templates/patroni-ingress.nix { clusterName = cluster.name; index = i; })
-      ]) indices;
+        (import ./kubevirt_templates/patroni-vm.nix      { clusterName = cluster.name; })
+        (import ./kubevirt_templates/patroni-service.nix { clusterName = cluster.name; })
+        (import ./kubevirt_templates/patroni-ingress.nix { clusterName = cluster.name; })
+      ];
     in pkgs.writeTextFile {
       name = "${cluster.name}.yml";
       text = lib.concatStringsSep "\n---\n" (map toString resources);
