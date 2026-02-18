@@ -141,9 +141,6 @@ nix build .#packages.x86_64-linux.haproxy
 
 ## Generate yaml manifest to deploy clusters
 
-
-[comment]: <> (could be great if we could have the possibility to have MANY clusters defined and just play a command to generate one cluster or all yaml files)
-
 ```
 # Generate ONE cluster yaml
 nix build .#paris-cluster

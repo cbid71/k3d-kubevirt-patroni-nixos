@@ -35,7 +35,7 @@
         (import ./kubevirt_templates/patroni-ingress.nix { clusterName = cluster.name; })
       ];
     in pkgs.writeTextFile {
-      name = "${cluster.name}.yml";
+      name = "${cluster.name}.yaml";
       text = lib.concatStringsSep "\n---\n" (map toString resources);
     };
 
