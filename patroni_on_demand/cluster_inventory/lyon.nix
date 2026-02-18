@@ -1,5 +1,5 @@
 {
-      name = "dev-cluster-1";
+      name = "lyon";
       haproxy_nb_nodes = 1;
       postgresql_nb_nodes = 1;
       etcd_nb_nodes = 1;
