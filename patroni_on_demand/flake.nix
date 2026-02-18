@@ -30,22 +30,23 @@
       text = lib.concatStringsSep "\n---\n" (map toString resources);
     };
 
+    clusters = [
+      (import ./clusters/paris.nix)
+      (import ./clusters/lyon.nix)
+    ];
+
   in
   {
     packages.${system} = {
       etcd = nixos-generators.nixosGenerate {
         inherit system pkgs;
         format = "qcow";
-        modules = [
-          ./images/etcd.nix
-        ];
+        modules = [ ./images/etcd.nix ];
       };
       postgresql-patroni = nixos-generators.nixosGenerate {
         inherit system pkgs;
         format = "qcow";
-        modules = [
-          ./images/postgresql-patroni.nix
-        ];
+        modules = [ ./images/postgresql-patroni.nix ];
       };
       haproxy = nixos-generators.nixosGenerate {
         inherit system pkgs;
@@ -55,6 +56,11 @@
 
       paris-yaml = generateClusterYaml (import ./clusters/paris.nix);
       lyon-yaml  = generateClusterYaml (import ./clusters/lyon.nix);
+
+      all-yaml = pkgs.symlinkJoin {
+        name = "all-yaml";
+        paths = map generateClusterYaml clusters;
+      };
     };
   };
 }
