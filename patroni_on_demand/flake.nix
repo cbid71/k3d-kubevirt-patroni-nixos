@@ -10,6 +10,16 @@
     pkgs = import nixpkgs { inherit system; };
     lib = nixpkgs.lib;
 
+    clusters = [
+      (import ./clusters/paris.nix)
+      (import ./clusters/lyon.nix)
+    ];
+
+    renameImage = name: image: pkgs.runCommand name {} ''
+      mkdir -p $out
+      cp ${image}/*.qcow2 $out/${name}.qcow2
+    '';
+
     generateClusterYaml = cluster: let
       indices = lib.range 0 (cluster.count - 1);
       resources = lib.concatMap (i: [
@@ -30,37 +40,33 @@
       text = lib.concatStringsSep "\n---\n" (map toString resources);
     };
 
-    clusters = [
-      (import ./clusters/paris.nix)
-      (import ./clusters/lyon.nix)
-    ];
-
   in
   {
     packages.${system} = {
-      etcd = nixos-generators.nixosGenerate {
+      etcd = renameImage "etcd" (nixos-generators.nixosGenerate {
         inherit system pkgs;
         format = "qcow";
         modules = [ ./images/etcd.nix ];
-      };
-      postgresql-patroni = nixos-generators.nixosGenerate {
+      });
+      postgresql-patroni = renameImage "postgresql-patroni" (nixos-generators.nixosGenerate {
         inherit system pkgs;
         format = "qcow";
         modules = [ ./images/postgresql-patroni.nix ];
-      };
-      haproxy = nixos-generators.nixosGenerate {
+      });
+      haproxy = renameImage "haproxy" (nixos-generators.nixosGenerate {
         inherit system pkgs;
         format = "qcow";
         modules = [ ./images/haproxy.nix ];
-      };
-
-      paris-yaml = generateClusterYaml (import ./clusters/paris.nix);
-      lyon-yaml  = generateClusterYaml (import ./clusters/lyon.nix);
+      });
 
       all-yaml = pkgs.symlinkJoin {
         name = "all-yaml";
         paths = map generateClusterYaml clusters;
       };
-    };
+
+    } // (lib.listToAttrs (map (cluster: {
+      name = "${cluster.name}-yaml";
+      value = generateClusterYaml cluster;
+    }) clusters));
   };
 }
