@@ -23,4 +23,4 @@
           services.etcd.listenPeerURLs = "http://0.0.0.0:2380";
         };
       };
-    }
+}

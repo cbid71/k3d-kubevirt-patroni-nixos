@@ -146,10 +146,11 @@ nix build .#packages.x86_64-linux.haproxy
 
 ```
 # Generate ONE cluster yaml
-nix build .#nixosConfigurations.parisYaml
+nix build .#paris-cluster
+nix build .#lyon-cluster
 
 # Generate ALL clusters yaml
-nix build .#nixosConfigurations
+nix build .#all-clusters
 ```
 
 

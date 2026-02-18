@@ -11,8 +11,8 @@
     lib = nixpkgs.lib;
 
     clusters = [
-      (import ./clusters/paris.nix)
-      (import ./clusters/lyon.nix)
+      (import ./cluster_inventory/paris.nix)
+      (import ./cluster_inventory/lyon.nix)
     ];
 
     renameImage = name: image: pkgs.runCommand name {} ''
@@ -60,12 +60,12 @@
       });
 
       all-yaml = pkgs.symlinkJoin {
-        name = "all-yaml";
+        name = "all-clusters";
         paths = map generateClusterYaml clusters;
       };
 
     } // (lib.listToAttrs (map (cluster: {
-      name = "${cluster.name}-yaml";
+      name = "${cluster.name}-cluster";
       value = generateClusterYaml cluster;
     }) clusters));
   };
