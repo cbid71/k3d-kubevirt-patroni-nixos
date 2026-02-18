@@ -22,7 +22,7 @@
 
     generateClusterYaml = cluster: let
       resources = [
-        (import ./kubevirt_templates/haproxy-vm.nix      { clusterName = cluster.name; })
+        (import ./kubevirt_templates/haproxy-vm.nix      { cluster = cluster; })
         (import ./kubevirt_templates/haproxy-service.nix { clusterName = cluster.name; })
         (import ./kubevirt_templates/haproxy-ingress.nix { clusterName = cluster.name; })
 
