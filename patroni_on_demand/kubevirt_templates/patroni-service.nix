@@ -1,7 +1,7 @@
 { cluster, index, ... }:
 
 let
-  serviceName = "service-${cluster.name}-${index}";
+  serviceName = "service-${cluster.name}-${toString index}";
 
   yamlContent = ''
     apiVersion: v1

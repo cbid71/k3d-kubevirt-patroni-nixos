@@ -1,7 +1,7 @@
 { cluster, index, ... }:
 
 let
-  ingressName = "ingress-${cluster.name}-${index}";
+  ingressName = "ingress-${cluster.name}-${toString index}";
 
   yamlContent = ''
     apiVersion: networking.k8s.io/v1

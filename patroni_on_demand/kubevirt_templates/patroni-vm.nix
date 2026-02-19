@@ -2,7 +2,7 @@
 
 let
   # Utilisation de l'index et du nom du cluster pour créer un nom de VM unique
-  vmName = "vm-${cluster.name}-${index}";
+  vmName = "vm-${cluster.name}-${toString index}";
 
   # Contenu YAML à générer
   yamlContent = ''
