@@ -24,10 +24,11 @@
       resources = (import ./kubevirt_templates/haproxy-cluster.nix { inherit cluster lib; })
                   ++ (import ./kubevirt_templates/etcd-cluster.nix { inherit cluster lib; })
                   ++ (import ./kubevirt_templates/patroni-cluster.nix { inherit cluster lib; });
-    in pkgs.writeTextFile {
-      name = "${cluster.name}.yaml";
-      text = lib.concatStringsSep "\n---\n" (map toString resources);
-    };
+      content = lib.concatStringsSep "\n---\n" (map toString resources);
+    in pkgs.runCommand "${cluster.name}-yaml" {} ''
+      mkdir -p $out
+      cp ${pkgs.writeText "${cluster.name}.yaml" content} $out/${cluster.name}.yaml
+    '';
 
   in
   {
