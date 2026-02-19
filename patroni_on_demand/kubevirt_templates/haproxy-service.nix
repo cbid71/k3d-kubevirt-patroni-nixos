@@ -1,4 +1,4 @@
-{ cluster, ... }:
+{ cluster, index, ... }:
 
 let
   serviceName = "service-${cluster.name}-${index}";

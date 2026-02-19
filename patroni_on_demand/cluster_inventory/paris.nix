@@ -1,5 +1,5 @@
 {
-name = "lyon";
+name = "paris";
 haproxy_nb_nodes = 3;
 postgresql_nb_nodes = 5;
 etcd_nb_nodes = 2;

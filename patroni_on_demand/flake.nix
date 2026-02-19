@@ -21,19 +21,9 @@
     '';
 
     generateClusterYaml = cluster: let
-      resources = [
-        (import ./kubevirt_templates/haproxy-vm.nix      { cluster = cluster; })
-        (import ./kubevirt_templates/haproxy-service.nix { clusterName = cluster.name; })
-        (import ./kubevirt_templates/haproxy-ingress.nix { clusterName = cluster.name; })
-
-        (import ./kubevirt_templates/etcd-vm.nix         { clusterName = cluster.name; })
-        (import ./kubevirt_templates/etcd-service.nix    { clusterName = cluster.name; })
-        (import ./kubevirt_templates/etcd-ingress.nix    { clusterName = cluster.name; })
-
-        (import ./kubevirt_templates/patroni-vm.nix      { clusterName = cluster.name; })
-        (import ./kubevirt_templates/patroni-service.nix { clusterName = cluster.name; })
-        (import ./kubevirt_templates/patroni-ingress.nix { clusterName = cluster.name; })
-      ];
+      resources = (import ./kubevirt_templates/haproxy-cluster.nix { inherit cluster lib; })
+                  ++ (import ./kubevirt_templates/etcd-cluster.nix { inherit cluster lib; })
+                  ++ (import ./kubevirt_templates/patroni-cluster.nix { inherit cluster lib; });
     in pkgs.writeTextFile {
       name = "${cluster.name}.yaml";
       text = lib.concatStringsSep "\n---\n" (map toString resources);

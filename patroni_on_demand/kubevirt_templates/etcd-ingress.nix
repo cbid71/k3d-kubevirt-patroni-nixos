@@ -1,4 +1,4 @@
-{ cluster, ... }:
+{ cluster, index, ... }:
 
 let
   ingressName = "ingress-${cluster.name}-${index}";

@@ -1,4 +1,4 @@
-{ cluster, ... }:
+{ cluster, index, ... }:
 
 let
   # Utilisation de l'index et du nom du cluster pour créer un nom de VM unique
