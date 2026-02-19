@@ -49,7 +49,7 @@
         modules = [ ./images/haproxy.nix ];
       };
 
-      all-yaml = pkgs.symlinkJoin {
+      all-clusters = pkgs.symlinkJoin {
         name = "all-clusters";
         paths = map generateClusterYaml clusters;
       };
