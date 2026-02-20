@@ -1,5 +1,17 @@
 # k3d-kubevirt-patroni-nixos
 
+## Disclaimer
+
+This whole project is for NixOS example and not meant to be fully functional
+We currently know those elemtents :
+
+- VM images need to be more developped and finished
+- make a whole functional patroni/etc/haproxy configuration
+- more developed yaml could be a good idea :
+    * management of Qemu images in the VM yaml using PVC + datavolumes + qcow images versionned in a S3 storage
+    * dynamic configuration of kubevirt VM instanciated, by using configmaps and volumes
+    * we should avoid using `cloud-init` known to be unstable with complex configuration
+
 ## Install dependencies - Option 1 standard Linux (Debian-Like)
 
 ### Install docker
@@ -157,6 +169,17 @@ Test inventories format :
 ```
 cd patroni_on_demand/
 nix-build tests/unit-cluster-inventory.nix
+# OR by the flake.nix section
+nix build .#checks.unit-cluster-inventory -L
+```
+
+Test generate postgresql (not fully functional, only for example, the image should be a little more developped)
+
+```
+cd patroni_on_demand/
+nix-build tests/test-postgresql-patroni.nix
+# OR by the flake.nix section
+nix build .#checks.integration-postgresql
 ```
 
 ## Bonus
