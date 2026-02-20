@@ -7,13 +7,13 @@ This whole project is for NixOS example and experiment, and not meant to be full
 We currently know those missing points :
 
 - VM images (directory `patroni_on_demand/images` need to be more developped
-- make a whole functional patroni/etc/haproxy configuration
+- make a whole functional patroni/etc/haproxy configuration by translating functional configurationg in `patroni_on_demand/kubevirt_templates` into config files on kubevirt VM
 - more developed yaml could be a good idea :
     * management of Qemu images in the VM yaml using PVC + datavolumes + qcow images versionned in a S3 storage
     * dynamic configuration of kubevirt VM instanciated, by using configmaps and volumes
     * we should avoid using `cloud-init` known to be unstable with complex configuration
 
-## Install dependencies - Option 1 standard Linux (Debian-Like)
+## Install dependencies - Option 1 : on Debian-like linux ( NOT RECOMMENDED )
 
 ### Install docker
 
@@ -65,7 +65,7 @@ k3d cluster list
 k3d cluster start mycluster
 ```
 
-## Install dependencies - Option 2 NixOS ( RECOMMENDED )
+## Install dependencies - Option 2 : on NixOS ( RECOMMENDED )
 
 Import the `dependencies_nixos/custom.nix` in `configuration.nix`
 
