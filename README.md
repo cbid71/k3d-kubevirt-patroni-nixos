@@ -150,10 +150,14 @@ nix build .#lyon-cluster
 nix build .#all-clusters
 ```
 
-
 ## Test framework
 
-TODO
+Test inventories format :
+
+```
+cd patroni_on_demand/
+nix-build tests/unit-cluster-inventory.nix
+```
 
 ## Bonus
 

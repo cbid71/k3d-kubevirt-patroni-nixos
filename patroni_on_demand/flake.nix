@@ -58,5 +58,20 @@
       name = "${cluster.name}-cluster";
       value = generateClusterYaml cluster;
     }) clusters));
+
+
+
+    checks = {
+
+      unit-cluster-inventory = import ./tests/unit-cluster-inventory.nix { inherit pkgs; };
+
+      integration-postgresql = import ./tests/test-postgresql-patroni.nix { inherit pkgs; };
+
+    };
+
+
+
+
   };
+
 }
