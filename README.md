@@ -2,10 +2,11 @@
 
 ## Disclaimer
 
-This whole project is for NixOS example and not meant to be fully functional
-We currently know those elemtents :
+This whole project is for NixOS example and experiment, and not meant to be fully functional
 
-- VM images need to be more developped and finished
+We currently know those missing points :
+
+- VM images (directory `patroni_on_demand/images` need to be more developped
 - make a whole functional patroni/etc/haproxy configuration
 - more developed yaml could be a good idea :
     * management of Qemu images in the VM yaml using PVC + datavolumes + qcow images versionned in a S3 storage
